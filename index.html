@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes da Família</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #f4d160;
+            --text: #eaeaea;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            color: var(--text);
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--gold), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            justify-items: center;
+        }
+
+        .movie-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 380px;
+            width: 100%;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(233, 69, 96, 0.3);
+            border-color: var(--accent);
+        }
+
+        .poster-container {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+        }
+
+        .poster-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .movie-card:hover .poster-container img {
+            transform: scale(1.1);
+        }
+
+        .poster-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .movie-info {
+            padding: 1.5rem;
+        }
+
+        .movie-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text);
+        }
+
+        .movie-original-title {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .movie-synopsis {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .movie-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .movies-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1.5rem 0.75rem;
+            }
+            
+            header {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎬 Filmes da Família</h1>
+        <p>Nossa coleção curada de filmes para assistir juntos</p>
+    </header>
+
+    <main class="container">
+        <div class="movies-grid">
+            <!-- Sociedade dos Poetas Mortos -->
+            <article class="movie-card">
+                <div class="poster-container">
+                    <img src="https://image.tmdb.org/t/p/w500/ai40gM7SUaGA8ZbravXxFBrKdJm.jpg" 
+                         alt="Sociedade dos Poetas Mortos"
+                         loading="lazy">
+                    <div class="poster-overlay">
+                        <span class="year-badge">1989</span>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <h2 class="movie-title">Sociedade dos Poetas Mortos</h2>
+                    <p class="movie-original-title">Dead Poets Society</p>
+                    <p class="movie-synopsis">
+                        Em um colégio interno tradicional da Nova Inglaterra, um professor de inglês apaixonado 
+                        inspira seus alunos a desafiar convenções e aproveitar o potencial de cada dia, 
+                        enfrentando a desaprovação do rígido diretor. "Carpe Diem" — aproveite o dia.
+                    </p>
+                    <div class="movie-meta">
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Drama
+                        </span>
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            2h 9min
+                        </span>
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            Robin Williams
+                        </span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Bom Dia, Vietnã -->
+            <article class="movie-card">
+                <div class="poster-container">
+                    <img src="https://image.tmdb.org/t/p/w500/5hdpn2wzqQQAPFP9KPUquNhOlS7.jpg" 
+                         alt="Bom Dia, Vietnã"
+                         loading="lazy">
+                    <div class="poster-overlay">
+                        <span class="year-badge">1987</span>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <h2 class="movie-title">Bom Dia, Vietnã</h2>
+                    <p class="movie-original-title">Good Morning, Vietnam</p>
+                    <p class="movie-synopsis">
+                        Em 1965, Adrian Cronauer, um DJ irreverente e não convencional, é designado para 
+                        a estação de rádio das Forças Armadas no Vietnã. Seu estilo único e humor 
+                        provocativo conquistam os soldados, mas desafiam seus superiores militares.
+                    </p>
+                    <div class="movie-meta">
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            Comédia/Drama
+                        </span>
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            2h 1min
+                        </span>
+                        <span class="meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            Robin Williams
+                        </span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>Feito com ❤️ para a família • Dados de filmes via <a href="https://www.themoviedb.org/" target="_blank">TMDB</a></p>
+    </footer>
+</body>
+</html>
